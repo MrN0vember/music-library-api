@@ -1,0 +1,27 @@
+{
+  "name": "music-library-api",
+  "version": "1.0.0",
+  "description": "In the following 2 weeks, we'll be applying our knowledge of databases by using what we have learned to build a Music Library API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r dotenv/config index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrN0vember/music-library-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrN0vember/music-library-api/issues"
+  },
+  "homepage": "https://github.com/MrN0vember/music-library-api#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
