@@ -102,12 +102,25 @@ describe('/artists', () => {
                     }).catch(error => done(error));
                 }).catch(error => done(error));
             });
+            it('updates artists name by id', (done) => {
+                const artist = artists[0];
+                request(app)
+                .patch(`/artists/${artist.id}`)
+                .send({ name: 'The Mars Volta'})
+                .then((res) => {
+                    expect(res.status).to.equal(200);
+                    Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
+                        expect(updatedArtist.name).to.equal('The Mars Volta');
+                        done();
+                    }).catch(error => done(error));
+                }).catch(error => done(error));
         });
+
     });
 
     
 
-
+});
 });
 
 
