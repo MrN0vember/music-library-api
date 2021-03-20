@@ -127,11 +127,23 @@ describe('/artists', () => {
     });
         
     describe('DELETE /artists/:artistId', () => {
+        let artists;
+        beforeEach((done) => {
+            Promise.all([
+                Artist.create({ name:'Tame Impala', genre: 'Rock' }),
+                Artist.create({ name: 'Kylie Minogue', genre: 'Pop' }),
+                Artist.create({ name: 'Dave Mathews', genre: 'Trash'}),
+            ]).then((documents) => {
+                artists = documents;
+                done();
+            });
+        });
+
         it('deletes artist record by id', (done) => {
           const artist = artists[0];
           request(app)
             .delete(`/artists/${artist.id}`)
-            .then((res) => {
+            .then((res) => {   
               expect(res.status).to.equal(204);
               Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
                 expect(updatedArtist).to.equal(null);
