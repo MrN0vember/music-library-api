@@ -127,17 +127,6 @@ describe('/artists', () => {
     });
         
     describe('DELETE /artists/:artistId', () => {
-        let artists;
-        beforeEach((done) => {
-            Promise.all([
-                Artist.create({ name:'Tame Impala', genre: 'Rock' }),
-                Artist.create({ name: 'Kylie Minogue', genre: 'Pop' }),
-                Artist.create({ name: 'Dave Mathews', genre: 'Trash'}),
-            ]).then((documents) => {
-                artists = documents;
-                done();
-            });
-        });
 
         it('deletes artist record by id', (done) => {
           const artist = artists[0];
