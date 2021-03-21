@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../src/app');
 const { Artist, Album } = require('../src/models');
+const artist = require('../src/models/artist');
 
 describe('/albums', () => {
     let artist;
@@ -63,4 +64,37 @@ describe('/albums', () => {
        }); 
     });
 
+
+describe('With artists in database', () => {
+    let albums;
+    beforeEach((done) => {
+        Promise.all([
+            Album.create({ name: "Hello Nasty", year: 1998, artistId: artist.id }),
+            Album.create({ name: "High Violet", year: 2010, artistId: artist.id}),
+            Album.create({ name: "Ohms", year: 2020, artistId: artist.id}),
+        ]).then((documents) => {
+            albums = documents;
+            done();
+        }).catch(error => done(error));
+    });
+
+describe('GET/albums', () => {
+    it('gets all albums', (done) => {
+        request(app)
+        .get('/albums')
+        .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.length).to.equal(3);
+            res.body.forEach((album) => {
+                const expected = albums.find((a) => a.id === album.id);
+                expect(album.name).to.equal(expected.name);
+                expect(album.year).to.equal(expected.year);
+                expect(album.artistId).to.equal(expected.artistId);
+            });
+            done();
+            }).catch(error => done(error));
+        });
+     });
+
+    });
 });

@@ -12,3 +12,10 @@ exports.createAlbum = (req, res) => {
         }
     });
 };
+
+exports.getAlbums = (req, res) => {
+    Album.findAll().then(albums => {
+        res.status(200)
+        .json(albums);
+      });
+};
