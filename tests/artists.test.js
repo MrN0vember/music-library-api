@@ -23,7 +23,6 @@ describe('/artists', () => {
                 name: 'Tame Impala',
                 genre: 'Rock',
             }).then(response => {
-                console.log(response);
                 expect(response.status).to.equal(201);
                 expect(response.body.name).to.equal('Tame Impala');
                 expect(response.body.genre).to.equal('Rock');

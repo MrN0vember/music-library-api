@@ -96,5 +96,28 @@ describe('GET/albums', () => {
         });
      });
 
+     describe('GET/albums/:albumsId', () => {
+         it('it gets album by id', (done) => {
+            const album = albums[0] 
+            request(app)
+            .get(`/albums/${album.id}`)
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.body.name).to.equal(album.name);
+                expect(res.body.year).to.equal(album.year);
+                done();
+            }).catch(error => done(error));
+         });
+     });
+     it('returns a 404 if the album does not exist', (done) => {
+         request(app)
+         .get('/albums/12345')
+         .then((res) => {
+             expect(res.status).to.equal(404);
+             expect(res.body.error).to.equal('The album could not be found.');
+             done();
+         }).catch(error => done(error));
+     });
+
     });
 });

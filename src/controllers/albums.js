@@ -19,3 +19,11 @@ exports.getAlbums = (req, res) => {
         .json(albums);
       });
 };
+
+exports.getAlbumById = (req, res) => {
+    Album.findByPk(req.params.albumId).then(album => {
+            if (!album) res.status(404).json({ error: "The album could not be found." });
+            else res.status(200).json(album);
+        });
+};
+
