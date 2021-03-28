@@ -18,6 +18,7 @@ app.post('/artists/:artistId/albums', albumControllers.createAlbum);
 app.get('/albums', albumControllers.getAlbums);
 app.get('/albums/:albumId/', albumControllers.getAlbumById);
 app.patch('/albums/:albumId/', albumControllers.updateAlbum);
+app.delete('/albums/:albumId', albumControllers.deleteAlbum);
 
 
 
