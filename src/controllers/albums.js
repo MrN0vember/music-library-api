@@ -1,5 +1,5 @@
 const { Artist, Album } = require('../models');
-const album = require('../models/album');
+
 
 exports.createAlbum = (req, res) => {
     Artist.findByPk(req.params.artistId).then(artist => {
