@@ -35,10 +35,11 @@ describe('/songs', () => {
         }
 
     });
+
     describe('Post/albums/:albumId/song', () => {
     it('creates a new song under an album', (done) => {
         request(app)
-          .post(`/album/${album.id}/song`)
+          .post(`/albums/${album.id}/song`)
           .send({
             artist: artist.id,
             name: 'Solitude Is Bliss',
@@ -50,6 +51,18 @@ describe('/songs', () => {
             expect(res.body.albumId).to.equal(album.id);
             done();
           }).catch(error => done(error));
+      });
+      it(' returns a 404 error if the album does not exist', (done) => {
+          request(app)
+          .post('/albums/12345/song')
+          .send({artistId: artist.id,
+            name:'Solitude Is Bliss'
+        })
+        .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal('The album could not be found.')
+            done();
+        }).catch(error => done(error));
       });
 });
 
