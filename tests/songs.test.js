@@ -64,6 +64,19 @@ describe('/songs', () => {
             done();
         }).catch(error => done(error));
       });
-});
+    });
+    describe('GET/Songs', () => {
+        it('gets all songs', (done) => {
+            request(app)
+            .get('/songs')
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.song.name).to.equal('Solitude Is Bliss');
+                //expect(res.body.artistId).to.equal(artist.id);
+               // expect(res.body.albumId).to.equal(album.id);  
+                done();
+            }).catch(error => done(error));
+        });
+    });
 
 });

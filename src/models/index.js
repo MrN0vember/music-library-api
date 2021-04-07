@@ -26,7 +26,7 @@ return {
   Artist,
   Album,
   Song
-};
+  };
 };
 
 module.exports = setupDatebase();
